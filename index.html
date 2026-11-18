@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qs.tesisku — Dashboard Tesis SEM-PLS RSU Banjar Patroman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-900 text-white py-8 px-6 shadow-md">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <span class="bg-blue-700 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Project: qs.tesisku (MARS Universitas Esa Unggul)</span>
+                <h1 class="text-2xl md:text-3xl font-bold mt-2">Pengaruh Customer Experience & AI-Based Chatbot terhadap Keputusan Pasien Rawat Inap</h1>
+                <p class="text-blue-200 mt-2 text-sm">Peneliti: Fa'idh Husnan (NIM: 20220309186) — RSU Banjar Patroman</p>
+            </div>
+            <div class="bg-blue-800/80 border border-blue-600 px-4 py-3 rounded-lg text-right">
+                <p class="text-xs text-blue-300 font-semibold uppercase">Status Dataset</p>
+                <p class="text-lg font-bold text-white">278 Responden Verified</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-6 py-8 space-y-8">
+        
+        <!-- Section 1: Ringkasan Sampel -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <p class="text-xs text-slate-500 uppercase font-bold">Total Sampel (N)</p>
+                <p class="text-3xl font-extrabold text-blue-900 mt-1">278</p>
+                <p class="text-xs text-slate-400 mt-1">Pasien / Keluarga Rawat Inap</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <p class="text-xs text-slate-500 uppercase font-bold">Model Analisis</p>
+                <p class="text-3xl font-extrabold text-blue-900 mt-1">SEM-PLS 4</p>
+                <p class="text-xs text-slate-400 mt-1">SmartPLS Algorithm & Bootstrapping</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <p class="text-xs text-slate-500 uppercase font-bold">R-Square Keputusan (Y)</p>
+                <p class="text-3xl font-extrabold text-blue-900 mt-1">47.1%</p>
+                <p class="text-xs text-slate-400 mt-1">R² = 0.471 (Moderat)</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <p class="text-xs text-slate-500 uppercase font-bold">Model Fit (SRMR)</p>
+                <p class="text-3xl font-extrabold text-emerald-600 mt-1">0.045</p>
+                <p class="text-xs text-slate-400 mt-1">Good Fit (< 0.08)</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Tabel Hasil Uji Hipotesis -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-100 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                <h2 class="font-bold text-slate-800">Ringkasan Hasil Uji Hipotesis (Bootstrapping 5.000 Subsamples)</h2>
+                <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded">Signifikan p < 0.05</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
+                            <th class="py-3 px-6">Jalur Hubungan Struktural</th>
+                            <th class="py-3 px-4 text-center">Original Sample (β)</th>
+                            <th class="py-3 px-4 text-center">t-Statistic (> 1.96)</th>
+                            <th class="py-3 px-4 text-center">p-Value (< 0.05)</th>
+                            <th class="py-3 px-6 text-center">Kesimpulan</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="py-3 px-6 font-medium">Customer Experience (X1) → Benevolence Trust (Z)</td>
+                            <td class="py-3 px-4 text-center font-bold">0.426</td>
+                            <td class="py-3 px-4 text-center">8.920</td>
+                            <td class="py-3 px-4 text-center">0.000</td>
+                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 font-medium">AI-Based Chatbot (X2) → Benevolence Trust (Z)</td>
+                            <td class="py-3 px-4 text-center font-bold">0.409</td>
+                            <td class="py-3 px-4 text-center">8.936</td>
+                            <td class="py-3 px-4 text-center">0.000</td>
+                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 font-medium">Customer Experience (X1) → Keputusan Pasien (Y)</td>
+                            <td class="py-3 px-4 text-center font-bold">0.232</td>
+                            <td class="py-3 px-4 text-center">4.781</td>
+                            <td class="py-3 px-4 text-center">0.000</td>
+                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 font-medium">AI-Based Chatbot (X2) → Keputusan Pasien (Y)</td>
+                            <td class="py-3 px-4 text-center font-bold">0.298</td>
+                            <td class="py-3 px-4 text-center">5.787</td>
+                            <td class="py-3 px-4 text-center">0.000</td>
+                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 font-medium">Benevolence Trust (Z) → Keputusan Pasien (Y)</td>
+                            <td class="py-3 px-4 text-center font-bold">0.393</td>
+                            <td class="py-3 px-4 text-center">7.304</td>
+                            <td class="py-3 px-4 text-center">0.000</td>
+                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 font-medium">X1 → Benevolence Trust (Z) → Keputusan (Y) [Mediasi]</td>
+                            <td class="py-3 px-4 text-center font-bold">0.168</td>
+                            <td class="py-3 px-4 text-center">5.136</td>
+                            <td class="py-3 px-4 text-center">0.000</td>
+                            <td class="py-3 px-6 text-center text-blue-600 font-semibold">Signifikan (Mediasi Parsial)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 font-medium">X2 → Benevolence Trust (Z) → Keputusan (Y) [Mediasi]</td>
+                            <td class="py-3 px-4 text-center font-bold">0.161</td>
+                            <td class="py-3 px-4 text-center">5.910</td>
+                            <td class="py-3 px-4 text-center">0.000</td>
+                            <td class="py-3 px-6 text-center text-blue-600 font-semibold">Signifikan (Mediasi Parsial)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 3: Akses Dataset & JSON Endpoint -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h3 class="font-bold text-blue-900 text-lg">Akses Data mentah & Endpoint JSON (qs.tesisku)</h3>
+                <p class="text-sm text-blue-700 mt-1">File <code>data_278_responden.json</code> tersedia secara lokal dan siap di-deploy ke Vercel.</p>
+            </div>
+            <div class="flex gap-3">
+                <a href="data_278_responden.json" download class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition">Unduh JSON (278 Responden)</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-xs text-slate-400 border-t border-slate-200 mt-12">
+        &copy; 2026 Fa'idh Husnan (NIM: 20220309186) — Project: qs.tesisku. Hosted on Vercel.
+    </footer>
+</body>
+</html>
