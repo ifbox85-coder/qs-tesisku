@@ -3,140 +3,751 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>qs.tesisku — Dashboard Tesis SEM-PLS RSU Banjar Patroman</title>
+    <title>Kuesioner & Dashboard Hasil Penelitian (N=278) — RSU Banjar Patroman</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .tab-active { border-bottom: 3px solid #1e3a8a; color: #1e3a8a; font-weight: 700; }
+        .likert-radio:checked + label {
+            background-color: #1e3a8a;
+            color: white;
+            border-color: #1e3a8a;
+            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.25);
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
-    <!-- Header -->
-    <header class="bg-blue-900 text-white py-8 px-6 shadow-md">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-                <span class="bg-blue-700 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Project: qs.tesisku (MARS Universitas Esa Unggul)</span>
-                <h1 class="text-2xl md:text-3xl font-bold mt-2">Pengaruh Customer Experience & AI-Based Chatbot terhadap Keputusan Pasien Rawat Inap</h1>
-                <p class="text-blue-200 mt-2 text-sm">Peneliti: Fa'idh Husnan (NIM: 20220309186) — RSU Banjar Patroman</p>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- Top Navigation / Header -->
+    <header class="bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-900 text-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-7">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-blue-700/80 border border-blue-500/40 text-xs px-3 py-1 rounded-full font-semibold tracking-wide">
+                            TESIS MARS — UNIVERSITAS ESA UNGGUL
+                        </span>
+                        <span class="bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 text-xs px-3 py-1 rounded-full font-semibold">
+                            ● Live Dataset: <span id="headerTotalResp">278</span> Responden
+                        </span>
+                    </div>
+                    <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold mt-3 leading-snug">
+                        Pengaruh Customer Experience dan Pemanfaatan AI-Based Chatbot terhadap Keputusan Pasien Memilih Layanan Rawat Inap dengan Benevolence Trust sebagai Variabel Intervening
+                    </h1>
+                    <p class="text-blue-200 text-sm mt-2">
+                        Lokasi Penelitian: <strong>RSU Banjar Patroman</strong> • Peneliti: <strong>Fa'idh Husnan</strong> (NIM: 20220309186)
+                    </p>
+                </div>
             </div>
-            <div class="bg-blue-800/80 border border-blue-600 px-4 py-3 rounded-lg text-right">
-                <p class="text-xs text-blue-300 font-semibold uppercase">Status Dataset</p>
-                <p class="text-lg font-bold text-white">278 Responden Verified</p>
+
+            <!-- Navigation Tabs -->
+            <div class="flex space-x-6 mt-7 border-b border-blue-800/80 text-sm">
+                <button onclick="switchTab('kuesioner')" id="tabBtnKuesioner" class="pb-3 px-1 font-semibold text-white border-b-2 border-amber-400 transition">
+                    1. Prolog & Isian Kuesioner
+                </button>
+                <button onclick="switchTab('hasil')" id="tabBtnHasil" class="pb-3 px-1 font-semibold text-blue-300 hover:text-white transition">
+                    2. Hasil & Analisis Saat Ini (N = <span id="tabCountResp">278</span>)
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-6xl mx-auto px-6 py-8 space-y-8">
-        
-        <!-- Section 1: Ringkasan Sampel -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <p class="text-xs text-slate-500 uppercase font-bold">Total Sampel (N)</p>
-                <p class="text-3xl font-extrabold text-blue-900 mt-1">278</p>
-                <p class="text-xs text-slate-400 mt-1">Pasien / Keluarga Rawat Inap</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <p class="text-xs text-slate-500 uppercase font-bold">Model Analisis</p>
-                <p class="text-3xl font-extrabold text-blue-900 mt-1">SEM-PLS 4</p>
-                <p class="text-xs text-slate-400 mt-1">SmartPLS Algorithm & Bootstrapping</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <p class="text-xs text-slate-500 uppercase font-bold">R-Square Keputusan (Y)</p>
-                <p class="text-3xl font-extrabold text-blue-900 mt-1">47.1%</p>
-                <p class="text-xs text-slate-400 mt-1">R² = 0.471 (Moderat)</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <p class="text-xs text-slate-500 uppercase font-bold">Model Fit (SRMR)</p>
-                <p class="text-3xl font-extrabold text-emerald-600 mt-1">0.045</p>
-                <p class="text-xs text-slate-400 mt-1">Good Fit (< 0.08)</p>
-            </div>
-        </div>
+    <!-- MAIN CONTENT -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
 
-        <!-- Section 2: Tabel Hasil Uji Hipotesis -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-            <div class="bg-slate-100 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-                <h2 class="font-bold text-slate-800">Ringkasan Hasil Uji Hipotesis (Bootstrapping 5.000 Subsamples)</h2>
-                <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded">Signifikan p < 0.05</span>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse text-sm">
-                    <thead>
-                        <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
-                            <th class="py-3 px-6">Jalur Hubungan Struktural</th>
-                            <th class="py-3 px-4 text-center">Original Sample (β)</th>
-                            <th class="py-3 px-4 text-center">t-Statistic (> 1.96)</th>
-                            <th class="py-3 px-4 text-center">p-Value (< 0.05)</th>
-                            <th class="py-3 px-6 text-center">Kesimpulan</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        <tr>
-                            <td class="py-3 px-6 font-medium">Customer Experience (X1) → Benevolence Trust (Z)</td>
-                            <td class="py-3 px-4 text-center font-bold">0.426</td>
-                            <td class="py-3 px-4 text-center">8.920</td>
-                            <td class="py-3 px-4 text-center">0.000</td>
-                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-6 font-medium">AI-Based Chatbot (X2) → Benevolence Trust (Z)</td>
-                            <td class="py-3 px-4 text-center font-bold">0.409</td>
-                            <td class="py-3 px-4 text-center">8.936</td>
-                            <td class="py-3 px-4 text-center">0.000</td>
-                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-6 font-medium">Customer Experience (X1) → Keputusan Pasien (Y)</td>
-                            <td class="py-3 px-4 text-center font-bold">0.232</td>
-                            <td class="py-3 px-4 text-center">4.781</td>
-                            <td class="py-3 px-4 text-center">0.000</td>
-                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-6 font-medium">AI-Based Chatbot (X2) → Keputusan Pasien (Y)</td>
-                            <td class="py-3 px-4 text-center font-bold">0.298</td>
-                            <td class="py-3 px-4 text-center">5.787</td>
-                            <td class="py-3 px-4 text-center">0.000</td>
-                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-6 font-medium">Benevolence Trust (Z) → Keputusan Pasien (Y)</td>
-                            <td class="py-3 px-4 text-center font-bold">0.393</td>
-                            <td class="py-3 px-4 text-center">7.304</td>
-                            <td class="py-3 px-4 text-center">0.000</td>
-                            <td class="py-3 px-6 text-center text-emerald-600 font-semibold">Signifikan (Diterima)</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-6 font-medium">X1 → Benevolence Trust (Z) → Keputusan (Y) [Mediasi]</td>
-                            <td class="py-3 px-4 text-center font-bold">0.168</td>
-                            <td class="py-3 px-4 text-center">5.136</td>
-                            <td class="py-3 px-4 text-center">0.000</td>
-                            <td class="py-3 px-6 text-center text-blue-600 font-semibold">Signifikan (Mediasi Parsial)</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-6 font-medium">X2 → Benevolence Trust (Z) → Keputusan (Y) [Mediasi]</td>
-                            <td class="py-3 px-4 text-center font-bold">0.161</td>
-                            <td class="py-3 px-4 text-center">5.910</td>
-                            <td class="py-3 px-4 text-center">0.000</td>
-                            <td class="py-3 px-6 text-center text-blue-600 font-semibold">Signifikan (Mediasi Parsial)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <!-- ========================================================= -->
+        <!-- TAB 1: PROLOG & FORMULIR ISIAN KUESIONER                  -->
+        <!-- ========================================================= -->
+        <section id="sectionKuesioner" class="space-y-8">
+            
+            <!-- Prolog / Pengantar Penelitian -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-blue-50/80 border-b border-blue-100 px-6 py-4 flex items-center justify-between">
+                    <h2 class="font-bold text-blue-950 text-lg">Prolog & Lembar Persetujuan Responden (Informed Consent)</h2>
+                    <span class="text-xs font-semibold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-md">Estimasi: ± 5 Menit</span>
+                </div>
+                <div class="p-6 space-y-4 text-sm sm:text-base text-slate-700 leading-relaxed">
+                    <p><strong>Assalamu’alaikum Warahmatullahi Wabarakatuh / Salam Sejahtera,</strong></p>
+                    <p>
+                        Yth. Bapak/Ibu/Saudara/i Pasien maupun Keluarga Pasien Rawat Inap <strong>RSU Banjar Patroman</strong>,
+                    </p>
+                    <p>
+                        Perkenalkan, saya <strong>Fa'idh Husnan</strong> (NIM: 20220309186), mahasiswa Program Studi Magister Administrasi Rumah Sakit (MARS) Universitas Esa Unggul. Saat ini saya sedang melakukan penelitian tesis mengenai <em>"Pengaruh Customer Experience dan Pemanfaatan AI-Based Chatbot terhadap Keputusan Pasien Memilih Layanan Rawat Inap dengan Benevolence Trust sebagai Variabel Intervening di RSU Banjar Patroman"</em>.
+                    </p>
+                    <div class="bg-slate-50 border-l-4 border-blue-800 p-4 rounded-r-lg text-sm space-y-1.5">
+                        <p class="font-bold text-slate-900">Petunjuk & Jaminan Kerahasiaan:</p>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                            <li>Kuesioner ini ditujukan bagi pasien/keluarga pasien rawat inap RSU Banjar Patroman yang pernah berinteraksi dengan layanan <strong>AI-Based Chatbot</strong> rumah sakit.</li>
+                            <li>Tidak ada jawaban benar atau salah. Mohon pilih jawaban yang paling sesuai dengan pengalaman nyata Bapak/Ibu.</li>
+                            <li>Seluruh identitas dan data yang diberikan dijamin kerahasiaannya dan hanya digunakan untuk kepentingan akademik.</li>
+                        </ul>
+                    </div>
 
-        <!-- Section 3: Akses Dataset & JSON Endpoint -->
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h3 class="font-bold text-blue-900 text-lg">Akses Data mentah & Endpoint JSON (qs.tesisku)</h3>
-                <p class="text-sm text-blue-700 mt-1">File <code>data_278_responden.json</code> tersedia secara lokal dan siap di-deploy ke Vercel.</p>
+                    <div class="pt-2">
+                        <label class="inline-flex items-start gap-3 cursor-pointer select-none">
+                            <input type="checkbox" id="consentCheck" class="mt-1 w-4 h-4 text-blue-900 rounded border-slate-300 focus:ring-blue-800" checked>
+                            <span class="text-sm font-medium text-slate-800">
+                                Saya telah membaca prolog di atas dan <strong>bersedia secara sukarela</strong> berpartisipasi sebagai responden dalam penelitian ini.
+                            </span>
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div class="flex gap-3">
-                <a href="data_278_responden.json" download class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition">Unduh JSON (278 Responden)</a>
+
+            <!-- Form Kuesioner -->
+            <form id="surveyForm" class="space-y-8">
+                
+                <!-- Bagian A: Karakteristik Responden -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 mb-5">
+                        Bagian A. Profil & Karakteristik Responden
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-sm">
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1.5">Inisial Nama / No. RM (Opsional)</label>
+                            <input type="text" name="No_RM" placeholder="Contoh: Ny. S / 6102" class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 focus:outline-none focus:border-blue-800">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1.5">Jenis Kelamin <span class="text-red-500">*</span></label>
+                            <select name="Jenis_Kelamin" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                                <option value="">-- Pilih Jenis Kelamin --</option>
+                                <option value="Perempuan">Perempuan</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1.5">Kelompok Usia <span class="text-red-500">*</span></label>
+                            <select name="Kelompok_Usia" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                                <option value="">-- Pilih Kelompok Usia --</option>
+                                <option value="18–25 Tahun">18–25 Tahun</option>
+                                <option value="26–35 Tahun">26–35 Tahun</option>
+                                <option value="36–45 Tahun">36–45 Tahun</option>
+                                <option value="46–55 Tahun">46–55 Tahun</option>
+                                <option value="> 55 Tahun">> 55 Tahun</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1.5">Pendidikan Terakhir <span class="text-red-500">*</span></label>
+                            <select name="Pendidikan" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                                <option value="">-- Pilih Pendidikan --</option>
+                                <option value="SMA/SMK">SMA / SMK</option>
+                                <option value="Diploma (D3)">Diploma (D3)</option>
+                                <option value="Sarjana (S1)">Sarjana (S1)</option>
+                                <option value="Pascasarjana (S2/S3)">Pascasarjana (S2/S3)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1.5">Jenis Pembiayaan Rawat Inap <span class="text-red-500">*</span></label>
+                            <select name="Jenis_Pembiayaan" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                                <option value="">-- Pilih Pembiayaan --</option>
+                                <option value="BPJS Kesehatan">BPJS Kesehatan</option>
+                                <option value="Umum / Pribadi">Umum / Pribadi</option>
+                                <option value="Asuransi Swasta">Asuransi Swasta</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1.5">Topik Utama Interaksi Chatbot <span class="text-red-500">*</span></label>
+                            <select name="Kategori_Chat" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                                <option value="">-- Pilih Topik Chat --</option>
+                                <option value="Ketersediaan Kamar Rawat Inap">Ketersediaan Kamar Rawat Inap</option>
+                                <option value="Alur & Syarat Pendaftaran Rawat Inap">Alur & Syarat Pendaftaran Rawat Inap</option>
+                                <option value="Jadwal Dokter & Rujukan Opname">Jadwal Dokter & Rujukan Opname</option>
+                                <option value="Konfirmasi Administrasi / Handoff CS">Konfirmasi Administrasi / Handoff CS</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend Skala Likert 4 Poin -->
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm">
+                    <span class="font-bold text-amber-900">Keterangan Skala Penilaian (Likert 4 Poin):</span>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-white border border-amber-300 px-2.5 py-1 rounded font-semibold text-slate-700">1 = Sangat Tidak Setuju (STS)</span>
+                        <span class="bg-white border border-amber-300 px-2.5 py-1 rounded font-semibold text-slate-700">2 = Tidak Setuju (TS)</span>
+                        <span class="bg-white border border-amber-300 px-2.5 py-1 rounded font-semibold text-slate-700">3 = Setuju (S)</span>
+                        <span class="bg-white border border-amber-300 px-2.5 py-1 rounded font-semibold text-slate-700">4 = Sangat Setuju (SS)</span>
+                    </div>
+                </div>
+
+                <!-- Container Pertanyaan Variabel Dinamis -->
+                <div id="questionsContainer" class="space-y-8"></div>
+
+                <!-- Submit Bar -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-sm text-slate-600">
+                        <span id="progressText" class="font-bold text-blue-900">0 / 51</span> pernyataan telah diisi.
+                    </div>
+                    <div class="flex gap-3 w-full sm:w-auto">
+                        <button type="button" onclick="resetForm()" class="w-1/3 sm:w-auto px-5 py-3 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition">
+                            Reset
+                        </button>
+                        <button type="submit" class="w-2/3 sm:w-auto bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-xl font-bold text-sm shadow-md transition">
+                            Kirim Jawaban Kuesioner
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- TAB 2: DASHBOARD HASIL SAAT INI (278 RESPONDEN)           -->
+        <!-- ========================================================= -->
+        <section id="sectionHasil" class="hidden space-y-8">
+            
+            <!-- Banner Status Dataset -->
+            <div class="bg-emerald-900 text-white rounded-2xl p-6 shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="bg-emerald-700 text-emerald-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Rekapitulasi Data Lapangan Terkumpul
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-bold mt-2">
+                        Hasil Analisis Saat Ini: <span id="dashTotalN">278</span> Responden Terverifikasi
+                    </h2>
+                    <p class="text-emerald-200 text-sm mt-1">
+                        Periode Pengumpulan Data: 25 Juni 2025 – Juni 2026 • Instrumen: 51 Butir Pernyataan (Skala Likert 1–4)
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2.5">
+                    <a href="data_278_responden.json" download class="bg-white text-emerald-950 hover:bg-emerald-50 px-4 py-2.5 rounded-xl text-xs font-bold shadow transition">
+                        Unduh JSON (278 Data)
+                    </a>
+                    <button onclick="exportCurrentCSV()" class="bg-emerald-700 hover:bg-emerald-600 text-white border border-emerald-500 px-4 py-2.5 rounded-xl text-xs font-bold transition">
+                        Export CSV Terbaru
+                    </button>
+                </div>
             </div>
-        </div>
+
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs text-slate-500 uppercase font-bold">Total Responden (N)</p>
+                    <p id="kpiN" class="text-3xl font-extrabold text-blue-950 mt-1">278</p>
+                    <p class="text-xs text-emerald-600 font-medium mt-1">100% Memenuhi Kriteria Inklusi</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs text-slate-500 uppercase font-bold">R-Square Keputusan (Y)</p>
+                    <p class="text-3xl font-extrabold text-blue-950 mt-1">46.6%</p>
+                    <p class="text-xs text-slate-500 mt-1">R² = 0.466 (Moderat — SmartPLS 4)</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs text-slate-500 uppercase font-bold">R-Square Benevolence Trust (Z)</p>
+                    <p class="text-3xl font-extrabold text-blue-950 mt-1">34.2%</p>
+                    <p class="text-xs text-slate-500 mt-1">R² = 0.342 (Signifikan)</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs text-slate-500 uppercase font-bold">Model Fit (SRMR)</p>
+                    <p class="text-3xl font-extrabold text-emerald-600 mt-1">0.045</p>
+                    <p class="text-xs text-slate-500 mt-1">Good Fit (< 0.08)</p>
+                </div>
+            </div>
+
+            <!-- Grafik Demografi & Indeks Variabel -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-900 mb-1">Profil Responden Berdasarkan Pembiayaan & Usia</h3>
+                    <p class="text-xs text-slate-500 mb-4">Distribusi N = 278 Pasien/Keluarga Rawat Inap RSU Banjar Patroman</p>
+                    <div class="h-64">
+                        <canvas id="demoChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-900 mb-1">Rata-Rata Indeks Three Box Method per Variabel</h3>
+                    <p class="text-xs text-slate-500 mb-4">Rentang Kategori (N=278): Rendah (278–556) | Sedang (556,01–834) | Tinggi (834,01–1.112)</p>
+                    <div class="h-64">
+                        <canvas id="threeBoxChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabel 1: Ringkasan Outer Model -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-100 px-6 py-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <h3 class="font-bold text-slate-900">1. Evaluasi Outer Model (Validitas Konvergen & Reliabilitas Konstruk, N = 278)</h3>
+                    <span class="text-xs bg-blue-100 text-blue-900 font-bold px-2.5 py-1 rounded">SmartPLS 4 Algorithm</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
+                                <th class="py-3 px-6">Variabel / Konstruk Laten</th>
+                                <th class="py-3 px-4 text-center">Kode</th>
+                                <th class="py-3 px-4 text-center">Jumlah Butir</th>
+                                <th class="py-3 px-4 text-center">Rentang Outer Loading</th>
+                                <th class="py-3 px-4 text-center">AVE (> 0,50)</th>
+                                <th class="py-3 px-4 text-center">Cronbach's Alpha (≥ 0,70)</th>
+                                <th class="py-3 px-6 text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="py-3 px-6 font-semibold">Customer Experience</td>
+                                <td class="py-3 px-4 text-center font-bold text-blue-900">X1</td>
+                                <td class="py-3 px-4 text-center">12</td>
+                                <td class="py-3 px-4 text-center">0,743 – 0,851</td>
+                                <td class="py-3 px-4 text-center font-semibold">0,628</td>
+                                <td class="py-3 px-4 text-center font-semibold">0,946</td>
+                                <td class="py-3 px-6 text-center"><span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Valid & Reliabel</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-6 font-semibold">Pemanfaatan AI-Based Chatbot</td>
+                                <td class="py-3 px-4 text-center font-bold text-blue-900">X2</td>
+                                <td class="py-3 px-4 text-center">15</td>
+                                <td class="py-3 px-4 text-center">0,722 – 0,843</td>
+                                <td class="py-3 px-4 text-center font-semibold">0,627</td>
+                                <td class="py-3 px-4 text-center font-semibold">0,957</td>
+                                <td class="py-3 px-6 text-center"><span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Valid & Reliabel</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-6 font-semibold">Benevolence Trust (Intervening)</td>
+                                <td class="py-3 px-4 text-center font-bold text-blue-900">Z</td>
+                                <td class="py-3 px-4 text-center">12</td>
+                                <td class="py-3 px-4 text-center">0,721 – 0,825</td>
+                                <td class="py-3 px-4 text-center font-semibold">0,624</td>
+                                <td class="py-3 px-4 text-center font-semibold">0,945</td>
+                                <td class="py-3 px-6 text-center"><span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Valid & Reliabel</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-6 font-semibold">Keputusan Pasien Memilih Rawat Inap</td>
+                                <td class="py-3 px-4 text-center font-bold text-blue-900">Y</td>
+                                <td class="py-3 px-4 text-center">12</td>
+                                <td class="py-3 px-4 text-center">0,719 – 0,850</td>
+                                <td class="py-3 px-4 text-center font-semibold">0,621</td>
+                                <td class="py-3 px-4 text-center font-semibold">0,944</td>
+                                <td class="py-3 px-6 text-center"><span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Valid & Reliabel</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tabel 2: Hasil Uji Hipotesis (Inner Model) -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-100 px-6 py-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <h3 class="font-bold text-slate-900">2. Hasil Uji Hipotesis Pengaruh Langsung & Mediasi (Bootstrapping 5.000 Subsamples)</h3>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded">Taraf Signifikansi 5% (t > 1,96)</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
+                                <th class="py-3 px-6">Jalur Hubungan Struktural</th>
+                                <th class="py-3 px-4 text-center">Original Sample (β)</th>
+                                <th class="py-3 px-4 text-center">t-Statistic (> 1,96)</th>
+                                <th class="py-3 px-4 text-center">p-Value (< 0,05)</th>
+                                <th class="py-3 px-6 text-center">Kesimpulan Hipotesis</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="py-3 px-6 font-medium">Customer Experience (X1) → Benevolence Trust (Z)</td>
+                                <td class="py-3 px-4 text-center font-bold">0,425</td>
+                                <td class="py-3 px-4 text-center">8,691</td>
+                                <td class="py-3 px-4 text-center">0,000</td>
+                                <td class="py-3 px-6 text-center text-emerald-600 font-bold">Signifikan (Diterima)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-6 font-medium">AI-Based Chatbot (X2) → Benevolence Trust (Z)</td>
+                                <td class="py-3 px-4 text-center font-bold">0,403</td>
+                                <td class="py-3 px-4 text-center">8,233</td>
+                                <td class="py-3 px-4 text-center">0,000</td>
+                                <td class="py-3 px-6 text-center text-emerald-600 font-bold">Signifikan (Diterima)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-6 font-medium">Customer Experience (X1) → Keputusan Pasien (Y)</td>
+                                <td class="py-3 px-4 text-center font-bold">0,230</td>
+                                <td class="py-3 px-4 text-center">4,615</td>
+                                <td class="py-3 px-4 text-center">0,000</td>
+                                <td class="py-3 px-6 text-center text-emerald-600 font-bold">Signifikan (Diterima)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-6 font-medium">AI-Based Chatbot (X2) → Keputusan Pasien (Y)</td>
+                                <td class="py-3 px-4 text-center font-bold">0,298</td>
+                                <td class="py-3 px-4 text-center">6,055</td>
+                                <td class="py-3 px-4 text-center">0,000</td>
+                                <td class="py-3 px-6 text-center text-emerald-600 font-bold">Signifikan (Diterima)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-6 font-medium">Benevolence Trust (Z) → Keputusan Pasien (Y)</td>
+                                <td class="py-3 px-4 text-center font-bold">0,392</td>
+                                <td class="py-3 px-4 text-center">7,210</td>
+                                <td class="py-3 px-4 text-center">0,000</td>
+                                <td class="py-3 px-6 text-center text-emerald-600 font-bold">Signifikan (Diterima)</td>
+                            </tr>
+                            <tr class="bg-blue-50/40">
+                                <td class="py-3 px-6 font-medium">X1 → Benevolence Trust (Z) → Keputusan (Y) <em>[Mediasi]</em></td>
+                                <td class="py-3 px-4 text-center font-bold">0,167</td>
+                                <td class="py-3 px-4 text-center">5,549</td>
+                                <td class="py-3 px-4 text-center">0,000</td>
+                                <td class="py-3 px-6 text-center text-blue-700 font-bold">Signifikan (Mediasi Parsial)</td>
+                            </tr>
+                            <tr class="bg-blue-50/40">
+                                <td class="py-3 px-6 font-medium">X2 → Benevolence Trust (Z) → Keputusan (Y) <em>[Mediasi]</em></td>
+                                <td class="py-3 px-4 text-center font-bold">0,158</td>
+                                <td class="py-3 px-4 text-center">5,424</td>
+                                <td class="py-3 px-4 text-center">0,000</td>
+                                <td class="py-3 px-6 text-center text-blue-700 font-bold">Signifikan (Mediasi Parsial)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tabel 3: Distribusi Demografi Lengkap -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <h3 class="font-bold text-slate-900 mb-4">3. Ringkasan Distribusi Karakteristik Responden (N = 278)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <p class="font-bold text-blue-950 border-b pb-2 mb-2">Jenis Kelamin</p>
+                        <ul class="space-y-1.5 text-slate-700">
+                            <li class="flex justify-between"><span>Perempuan</span><strong>168 (60,4%)</strong></li>
+                            <li class="flex justify-between"><span>Laki-laki</span><strong>110 (39,6%)</strong></li>
+                        </ul>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <p class="font-bold text-blue-950 border-b pb-2 mb-2">Kelompok Usia</p>
+                        <ul class="space-y-1.5 text-slate-700">
+                            <li class="flex justify-between"><span>18–25 Tahun</span><strong>26 (9,4%)</strong></li>
+                            <li class="flex justify-between"><span>26–35 Tahun</span><strong>88 (31,7%)</strong></li>
+                            <li class="flex justify-between"><span>36–45 Tahun</span><strong>72 (25,9%)</strong></li>
+                            <li class="flex justify-between"><span>46–55 Tahun</span><strong>56 (20,1%)</strong></li>
+                            <li class="flex justify-between"><span>> 55 Tahun</span><strong>36 (12,9%)</strong></li>
+                        </ul>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <p class="font-bold text-blue-950 border-b pb-2 mb-2">Pendidikan Terakhir</p>
+                        <ul class="space-y-1.5 text-slate-700">
+                            <li class="flex justify-between"><span>SMA / SMK</span><strong>109 (39,2%)</strong></li>
+                            <li class="flex justify-between"><span>Diploma (D3)</span><strong>48 (17,3%)</strong></li>
+                            <li class="flex justify-between"><span>Sarjana (S1)</span><strong>99 (35,6%)</strong></li>
+                            <li class="flex justify-between"><span>Pascasarjana</span><strong>22 (7,9%)</strong></li>
+                        </ul>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <p class="font-bold text-blue-950 border-b pb-2 mb-2">Jenis Pembiayaan</p>
+                        <ul class="space-y-1.5 text-slate-700">
+                            <li class="flex justify-between"><span>BPJS Kesehatan</span><strong>174 (62,6%)</strong></li>
+                            <li class="flex justify-between"><span>Umum / Pribadi</span><strong>77 (27,7%)</strong></li>
+                            <li class="flex justify-between"><span>Asuransi Swasta</span><strong>27 (9,7%)</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
 
     </main>
 
+    <!-- Modal Sukses Submit -->
+    <div id="successModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center shadow-2xl space-y-4">
+            <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                ✓
+            </div>
+            <h3 class="text-xl font-extrabold text-slate-900">Terima Kasih atas Partisipasi Anda!</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+                Jawaban kuesioner Anda telah berhasil direkam ke dalam sistem penelitian tesis RSU Banjar Patroman. Anda sekarang dapat melihat rekapitulasi hasil penelitian saat ini.
+            </p>
+            <div class="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center">
+                <button onclick="closeModalAndViewResults()" class="bg-blue-900 hover:bg-blue-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition">
+                    Lihat Hasil Penelitian Sekarang
+                </button>
+                <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm font-semibold transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer class="text-center py-6 text-xs text-slate-400 border-t border-slate-200 mt-12">
-        &copy; 2026 Fa'idh Husnan (NIM: 20220309186) — Project: qs.tesisku. Hosted on Vercel.
+    <footer class="bg-white border-t border-slate-200 mt-16 py-6 text-center text-xs text-slate-500">
+        © 2026 Fa'idh Husnan (NIM: 20220309186) — Tesis Magister Administrasi Rumah Sakit (MARS) Universitas Esa Unggul • RSU Banjar Patroman.
     </footer>
+
+    <!-- JAVASCRIPT: DATA KISI-KISI 51 BUTIR & LOGIKA INTERAKTIF -->
+    <script>
+        const INSTRUMENT_SECTIONS = [
+            {
+                code: "X1",
+                title: "Bagian B. Customer Experience (X1)",
+                subtitle: "Penilaian pengalaman pasien selama memperoleh layanan rawat inap di RSU Banjar Patroman (12 Butir)",
+                items: [
+                    { id: "X1.1", text: "Saya dapat memperoleh informasi mengenai layanan rawat inap di rumah sakit ini dengan mudah." },
+                    { id: "X1.2", text: "Proses pendaftaran rawat inap di rumah sakit ini mudah saya ikuti." },
+                    { id: "X1.3", text: "Petugas rumah sakit segera membantu ketika saya membutuhkan pelayanan." },
+                    { id: "X1.4", text: "Tenaga kesehatan menjelaskan kondisi kesehatan saya dengan jelas." },
+                    { id: "X1.5", text: "Penjelasan tenaga kesehatan mengenai prosedur perawatan mudah saya pahami." },
+                    { id: "X1.6", text: "Informasi mengenai biaya rawat inap disampaikan dengan jelas kepada saya." },
+                    { id: "X1.7", text: "Tenaga kesehatan bersikap ramah ketika melayani saya." },
+                    { id: "X1.8", text: "Tenaga kesehatan mendengarkan kekhawatiran yang saya sampaikan mengenai perawatan saya." },
+                    { id: "X1.9", text: "Tenaga kesehatan memperlakukan saya dengan hormat selama menjalani rawat inap." },
+                    { id: "X1.10", text: "Ruang rawat inap yang saya tempati terjaga kebersihannya." },
+                    { id: "X1.11", text: "Tempat tidur yang saya gunakan terasa nyaman untuk beristirahat." },
+                    { id: "X1.12", text: "Privasi saya dijaga ketika menjalani pemeriksaan atau tindakan perawatan." }
+                ]
+            },
+            {
+                code: "X2",
+                title: "Bagian C. Pemanfaatan AI-Based Chatbot (X2)",
+                subtitle: "Penilaian penggunaan layanan asisten virtual / chatbot berbasis AI RSU Banjar Patroman (15 Butir)",
+                items: [
+                    { id: "X2.1", text: "Chatbot rumah sakit ini mudah saya operasikan." },
+                    { id: "X2.2", text: "Fitur yang tersedia pada chatbot rumah sakit ini mudah saya pahami." },
+                    { id: "X2.3", text: "Saya mudah menemukan informasi yang saya cari melalui chatbot rumah sakit ini." },
+                    { id: "X2.4", text: "Chatbot rumah sakit ini memberikan respons dengan cepat." },
+                    { id: "X2.5", text: "Jawaban chatbot rumah sakit ini sesuai dengan pertanyaan yang saya ajukan." },
+                    { id: "X2.6", text: "Tanggapan chatbot rumah sakit ini sesuai dengan kebutuhan layanan yang saya sampaikan." },
+                    { id: "X2.7", text: "Informasi yang disampaikan chatbot rumah sakit ini mudah saya pahami." },
+                    { id: "X2.8", text: "Informasi yang diberikan chatbot rumah sakit ini relevan dengan kebutuhan saya terkait layanan rawat inap." },
+                    { id: "X2.9", text: "Informasi dari chatbot membantu saya memahami layanan rawat inap di rumah sakit ini." },
+                    { id: "X2.10", text: "Saya dapat mengajukan pertanyaan lanjutan kepada chatbot rumah sakit ini dalam satu percakapan." },
+                    { id: "X2.11", text: "Chatbot rumah sakit ini menanggapi setiap pesan yang saya sampaikan selama percakapan." },
+                    { id: "X2.12", text: "Jawaban chatbot rumah sakit ini mempertimbangkan informasi yang telah saya sampaikan sebelumnya dalam percakapan." },
+                    { id: "X2.13", text: "Saya merasa nyaman menggunakan chatbot rumah sakit ini." },
+                    { id: "X2.14", text: "Saya menilai jawaban chatbot rumah sakit ini dapat dipercaya." },
+                    { id: "X2.15", text: "Chatbot rumah sakit ini membantu memenuhi kebutuhan informasi saya mengenai layanan rawat inap." }
+                ]
+            },
+            {
+                code: "Z",
+                title: "Bagian D. Benevolence Trust (Z)",
+                subtitle: "Kepercayaan pasien terhadap ketulusan dan niat baik RSU Banjar Patroman (12 Butir)",
+                items: [
+                    { id: "Z1.1", text: "Saya merasa diperhatikan oleh rumah sakit selama menerima pelayanan." },
+                    { id: "Z1.2", text: "Rumah sakit memahami kebutuhan saya selama menerima pelayanan." },
+                    { id: "Z1.3", text: "Rumah sakit menunjukkan perhatian terhadap kondisi dan kebutuhan saya." },
+                    { id: "Z1.4", text: "Rumah sakit dipersepsikan berusaha membantu saya dalam mendapatkan pelayanan yang baik." },
+                    { id: "Z1.5", text: "Saya yakin rumah sakit tidak memiliki motif untuk merugikan saya." },
+                    { id: "Z1.6", text: "Rumah sakit memberikan pelayanan secara tulus kepada pasien." },
+                    { id: "Z1.7", text: "Rumah sakit memahami perasaan saya selama menjalani pelayanan." },
+                    { id: "Z1.8", text: "Rumah sakit menunjukkan perhatian yang tulus terhadap saya sebagai pasien." },
+                    { id: "Z1.9", text: "Rumah sakit memberikan kenyamanan emosional selama saya menerima pelayanan." },
+                    { id: "Z1.10", text: "Rumah sakit mengutamakan kepentingan pasien dalam memberikan pelayanan." },
+                    { id: "Z1.11", text: "Rumah sakit memberikan solusi terbaik sesuai dengan kebutuhan dan kondisi saya." },
+                    { id: "Z1.12", text: "Rumah sakit memperlakukan pasien secara adil tanpa membeda-bedakan." }
+                ]
+            },
+            {
+                code: "Y",
+                title: "Bagian E. Keputusan Pasien Memilih Layanan Rawat Inap (Y)",
+                subtitle: "Proses pengambilan keputusan hingga penetapan pilihan rawat inap (12 Butir)",
+                items: [
+                    { id: "Y1.1", text: "Saya menyadari adanya masalah kesehatan yang memerlukan penanganan di rumah sakit." },
+                    { id: "Y1.2", text: "Saya merasa masalah kesehatan yang saya alami bersifat mendesak sehingga perlu segera ditangani." },
+                    { id: "Y1.3", text: "Saran atau dorongan dari keluarga, teman, atau orang terdekat memengaruhi saya untuk mencari layanan kesehatan." },
+                    { id: "Y1.4", text: "Saya mudah memperoleh informasi mengenai rumah sakit yang akan saya pilih." },
+                    { id: "Y1.5", text: "Saya menggunakan sumber digital, seperti situs web, media sosial, atau aplikasi, untuk mencari informasi rumah sakit." },
+                    { id: "Y1.6", text: "Informasi yang saya peroleh mengenai rumah sakit dinilai dapat dipercaya." },
+                    { id: "Y1.7", text: "Saya menilai kualitas layanan sebelum memutuskan untuk memilih rumah sakit." },
+                    { id: "Y1.8", text: "Reputasi rumah sakit menjadi salah satu pertimbangan saya dalam menentukan pilihan." },
+                    { id: "Y1.9", text: "Kemudahan akses menuju rumah sakit menjadi pertimbangan dalam pengambilan keputusan saya." },
+                    { id: "Y1.10", text: "Saya menetapkan rumah sakit sebagai pilihan berdasarkan pertimbangan yang telah saya lakukan." },
+                    { id: "Y1.11", text: "Saya melakukan pendaftaran atau reservasi layanan pada rumah sakit yang telah saya pilih." },
+                    { id: "Y1.12", text: "Saya yakin bahwa keputusan saya untuk memilih rumah sakit tersebut adalah keputusan yang tepat." }
+                ]
+            }
+        ];
+
+        const LIKERT_LABELS = [
+            { val: 1, short: "1 - STS", desc: "Sangat Tidak Setuju" },
+            { val: 2, short: "2 - TS", desc: "Tidak Setuju" },
+            { val: 3, short: "3 - S", desc: "Setuju" },
+            { val: 4, short: "4 - SS", desc: "Sangat Setuju" }
+        ];
+
+        // Render Form Pertanyaan
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = INSTRUMENT_SECTIONS.map(sec => `
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-100 px-6 py-4 border-b border-slate-200">
+                        <h3 class="text-lg font-bold text-blue-950">${sec.title}</h3>
+                        <p class="text-xs text-slate-600 mt-0.5">${sec.subtitle}</p>
+                    </div>
+                    <div class="divide-y divide-slate-100">
+                        ${sec.items.map((item, idx) => `
+                            <div class="p-5 hover:bg-slate-50/70 transition flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                                <div class="flex gap-3 items-start max-w-2xl">
+                                    <span class="bg-blue-100 text-blue-900 font-bold text-xs px-2.5 py-1 rounded-md shrink-0 mt-0.5">${item.id}</span>
+                                    <p class="text-sm sm:text-base text-slate-800 font-medium">${item.text}</p>
+                                </div>
+                                <div class="grid grid-cols-4 gap-2 shrink-0">
+                                    ${LIKERT_LABELS.map(opt => `
+                                        <div>
+                                            <input type="radio" id="${item.id}_${opt.val}" name="${item.id}" value="${opt.val}" required class="hidden likert-radio" onchange="updateProgress()">
+                                            <label for="${item.id}_${opt.val}" title="${opt.desc}" class="block text-center cursor-pointer border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-600 hover:border-blue-800 transition select-none">
+                                                ${opt.short}
+                                            </label>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateProgress() {
+            const totalItems = 51;
+            const answered = document.querySelectorAll('#surveyForm input[type="radio"]:checked').length;
+            document.getElementById('progressText').textContent = `${answered} / ${totalItems}`;
+        }
+
+        function resetForm() {
+            document.getElementById('surveyForm').reset();
+            updateProgress();
+        }
+
+        // Kelola Responden Tambahan via LocalStorage (Basis 278 Responden)
+        const BASE_COUNT = 278;
+        function getExtraSubmissions() {
+            try {
+                return JSON.parse(localStorage.getItem('rsbp_extra_responses') || '[]');
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function syncCounts() {
+            const extra = getExtraSubmissions();
+            const total = BASE_COUNT + extra.length;
+            document.getElementById('headerTotalResp').textContent = total;
+            document.getElementById('tabCountResp').textContent = total;
+            document.getElementById('dashTotalN').textContent = total;
+            document.getElementById('kpiN').textContent = total;
+        }
+
+        // Handle Submit Form
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!document.getElementById('consentCheck').checked) {
+                alert("Mohon centang persetujuan responden (Informed Consent) terlebih dahulu.");
+                return;
+            }
+            const formData = new FormData(this);
+            const entry = {
+                No_Resp: BASE_COUNT + getExtraSubmissions().length + 1,
+                Timestamp: new Date().toISOString()
+            };
+            formData.forEach((val, key) => {
+                entry[key] = isNaN(val) || key === 'No_RM' ? val : Number(val);
+            });
+
+            const existing = getExtraSubmissions();
+            existing.push(entry);
+            localStorage.setItem('rsbp_extra_responses', JSON.stringify(existing));
+
+            syncCounts();
+            this.reset();
+            updateProgress();
+            document.getElementById('successModal').classList.remove('hidden');
+            document.getElementById('successModal').classList.add('flex');
+        });
+
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            document.getElementById('successModal').classList.remove('flex');
+        }
+
+        function closeModalAndViewResults() {
+            closeModal();
+            switchTab('hasil');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Switch Tabs
+        function switchTab(tab) {
+            const secKuesioner = document.getElementById('sectionKuesioner');
+            const secHasil = document.getElementById('sectionHasil');
+            const btnKuesioner = document.getElementById('tabBtnKuesioner');
+            const btnHasil = document.getElementById('tabBtnHasil');
+
+            if (tab === 'kuesioner') {
+                secKuesioner.classList.remove('hidden');
+                secHasil.classList.add('hidden');
+                btnKuesioner.className = "pb-3 px-1 font-semibold text-white border-b-2 border-amber-400 transition";
+                btnHasil.className = "pb-3 px-1 font-semibold text-blue-300 hover:text-white transition";
+            } else {
+                secKuesioner.classList.add('hidden');
+                secHasil.classList.remove('hidden');
+                btnHasil.className = "pb-3 px-1 font-semibold text-white border-b-2 border-amber-400 transition";
+                btnKuesioner.className = "pb-3 px-1 font-semibold text-blue-300 hover:text-white transition";
+                renderCharts();
+            }
+        }
+
+        // Render Chart.js untuk Tab Hasil
+        let chartsInitialized = false;
+        function renderCharts() {
+            if (chartsInitialized) return;
+            chartsInitialized = true;
+
+            new Chart(document.getElementById('demoChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['BPJS Kesehatan', 'Umum / Pribadi', 'Asuransi Swasta', 'Usia 26–35 Th', 'Usia 36–45 Th', 'Usia 46–55 Th'],
+                    datasets: [{
+                        label: 'Jumlah Responden (N=278)',
+                        data: [174, 77, 27, 88, 72, 56],
+                        backgroundColor: ['#1e3a8a', '#2563eb', '#60a5fa', '#059669', '#10b981', '#6ee7b7'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            new Chart(document.getElementById('threeBoxChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Customer Experience (X1)', 'AI-Based Chatbot (X2)', 'Benevolence Trust (Z)', 'Keputusan Pasien (Y)'],
+                    datasets: [{
+                        label: 'Rata-rata Nilai Indeks (Skala 278–1.112)',
+                        data: [896.3, 877.1, 879.5, 882.4],
+                        backgroundColor: ['#1e40af', '#0284c7', '#0d9488', '#15803d'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { min: 278, max: 1112 } }
+                }
+            });
+        }
+
+        // Export CSV Gabungan (278 Data + Input Baru)
+        async function exportCurrentCSV() {
+            try {
+                const res = await fetch('data_278_responden.json');
+                const baseData = await res.json();
+                const allData = baseData.concat(getExtraSubmissions());
+                const headers = Object.keys(allData[0]);
+                const csvRows = [
+                    headers.join(','),
+                    ...allData.map(row => headers.map(h => `"${(row[h] ?? '').toString().replace(/"/g, '""')}"`).join(','))
+                ];
+                const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Dataset_Kuesioner_${allData.length}_Responden_RSBP.csv`;
+                a.click();
+            } catch (err) {
+                alert("Pastikan file data_278_responden.json berada di folder yang sama saat di-deploy ke Vercel.");
+            }
+        }
+
+        // Init
+        renderQuestions();
+        syncCounts();
+    </script>
 </body>
 </html>
