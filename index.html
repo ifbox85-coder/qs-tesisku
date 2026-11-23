@@ -24,28 +24,29 @@
     <header class="bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-900 text-white shadow-lg">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-7">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-			<div>
-				<div class="flex flex-wrap items-center gap-2">
-					<span class="bg-blue-700/80 border border-blue-500/40 text-xs px-3 py-1 rounded-full font-semibold tracking-wide">
-						TESIS MARS — UNIVERSITAS ESA UNGGUL
-					</span>
-					<span class="bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 text-xs px-3 py-1 rounded-full font-semibold">
-						● Live Dataset: <span id="headerTotalResp">278</span> Responden
-					</span>
-				</div>
-				<h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold mt-3 leading-snug">
-					Pengaruh Customer Experience dan Pemanfaatan AI-Based Chatbot terhadap Keputusan Pasien Memilih Layanan Rawat Inap dengan Benevolence Trust sebagai Variabel Intervening
-				</h1>
-				<p class="text-blue-200 text-sm mt-2">
-					Lokasi Penelitian: <strong>RSU Banjar Patroman</strong> • Peneliti: <strong>Fa'idh Husnan</strong> (NIM: 20220309186)
-				</p>
-				<p class="text-blue-200 text-sm mt-1">
-					Kontak WhatsApp: 
-					<a href="https://wa.me/6282119119299" target="_blank" rel="noopener noreferrer" class="font-medium text-emerald-300 hover:text-emerald-200 underline">
-						+62 821-1911-9299
-					</a>
-				</p>
-			</div>
+                <div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-blue-700/80 border border-blue-500/40 text-xs px-3 py-1 rounded-full font-semibold tracking-wide">
+                            TESIS MARS — UNIVERSITAS ESA UNGGUL
+                        </span>
+                        <span class="bg-amber-500/20 border border-amber-400/40 text-amber-200 text-xs px-3 py-1 rounded-full font-semibold">
+                            ● Pengisian Ditutup (20 Nov, 23.59 WIB) • Final Dataset: <span id="headerTotalResp">278</span> Responden
+                        </span>
+                    </div>
+                    <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold mt-3 leading-snug">
+                        Pengaruh Customer Experience dan Pemanfaatan AI-Based Chatbot terhadap Keputusan Pasien Memilih Layanan Rawat Inap dengan Benevolence Trust sebagai Variabel Intervening
+                    </h1>
+                    <p class="text-blue-200 text-sm mt-2">
+                        Lokasi Penelitian: <strong>RSU Banjar Patroman</strong> • Peneliti: <strong>Fa'idh Husnan</strong> (NIM: 20220309186)
+                    </p>
+                    <p class="text-blue-200 text-sm mt-1">
+                        Kontak WhatsApp: 
+                        <a href="https://wa.me/6282119119299" target="_blank" rel="noopener noreferrer" class="font-medium text-emerald-300 hover:text-emerald-200 underline">
+                            +62 821-1911-9299
+                        </a>
+                    </p>
+                </div>
+            </div>
 
             <!-- Navigation Tabs -->
             <div class="flex space-x-6 mt-7 border-b border-blue-800/80 text-sm">
@@ -53,7 +54,7 @@
                     1. Prolog & Isian Kuesioner
                 </button>
                 <button onclick="switchTab('hasil')" id="tabBtnHasil" class="pb-3 px-1 font-semibold text-blue-300 hover:text-white transition">
-                    2. Hasil & Analisis Saat Ini (N = <span id="tabCountResp">278</span>)
+                    2. Hasil & Analisis Final (N = <span id="tabCountResp">278</span>)
                 </button>
             </div>
         </div>
@@ -66,10 +67,28 @@
         <!-- TAB 1: PROLOG & FORMULIR ISIAN KUESIONER                  -->
         <!-- ========================================================= -->
         <section id="sectionKuesioner" class="space-y-8">
+
+            <!-- Banner Notifikasi Status Penutupan Kuesioner -->
+            <div class="bg-amber-50 border-l-4 border-amber-600 rounded-r-2xl p-5 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-amber-600 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                            Status Kuesioner: Ditutup Resmi
+                        </span>
+                        <span class="text-xs font-semibold text-amber-900">20 November 2026 • Pukul 23.59 WIB</span>
+                    </div>
+                    <p class="text-sm text-slate-800 leading-relaxed">
+                        Pengumpulan data kuesioner ini telah resmi <strong>dihentikan pada tanggal 20 November 2026 pukul 23.59 WIB</strong> dengan capaian akhir sebanyak <strong>278 responden terverifikasi</strong> (100% kuota sampel terpenuhi). Formulir di bawah ini ditampilkan dalam mode arsip baca-saja (*read-only*).
+                    </p>
+                </div>
+                <button type="button" onclick="switchTab('hasil')" class="shrink-0 bg-blue-900 hover:bg-blue-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow transition">
+                    Lihat Rekapitulasi 278 Data →
+                </button>
+            </div>
             
             <!-- Prolog / Pengantar Penelitian -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                <div class="bg-blue-50/80 border-b border-blue-100 px-6 py-4 flex items-center justify-between">
+                <div class="bg-blue-50/80 border-b border-blue-100 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
                     <h2 class="font-bold text-blue-950 text-lg">Prolog & Lembar Persetujuan Responden (Informed Consent)</h2>
                     <span class="text-xs font-semibold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-md">Estimasi: ± 5 Menit</span>
                 </div>
@@ -79,20 +98,33 @@
                         Yth. Bapak/Ibu/Saudara/i Pasien maupun Keluarga Pasien Rawat Inap <strong>RSU Banjar Patroman</strong>,
                     </p>
                     <p>
-                        Perkenalkan, saya <strong>Fa'idh Husnan</strong> (NIM: 20220309186), mahasiswa Program Studi Magister Administrasi Rumah Sakit (MARS) Universitas Esa Unggul. Saat ini saya sedang melakukan penelitian tesis mengenai <em>"Pengaruh Customer Experience dan Pemanfaatan AI-Based Chatbot terhadap Keputusan Pasien Memilih Layanan Rawat Inap dengan Benevolence Trust sebagai Variabel Intervening di RSU Banjar Patroman"</em>.
+                        Perkenalkan, saya <strong>Fa'idh Husnan</strong> (NIM: 20220309186), mahasiswa Program Studi Magister Administrasi Rumah Sakit (MARS) Universitas Esa Unggul. Saat ini saya melaksanakan penelitian tesis mengenai <em>"Pengaruh Customer Experience dan Pemanfaatan AI-Based Chatbot terhadap Keputusan Pasien Memilih Layanan Rawat Inap dengan Benevolence Trust sebagai Variabel Intervening di RSU Banjar Patroman"</em>.
                     </p>
+
+                    <!-- Blok Jadwal & Waktu Pelaksanaan Survei -->
+                    <div class="bg-blue-50/60 border border-blue-200 rounded-xl p-4 text-sm space-y-2">
+                        <p class="font-bold text-blue-950 flex items-center gap-2">
+                            <span>🗓️</span> Informasi Waktu & Periode Pengisian Kuesioner:
+                        </p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-1">
+                            <li><strong>Pembukaan Akses Survei:</strong> Tautan kuesioner mulai didistribusikan secara resmi melalui pesan siaran (<em>broadcast</em>) pada tanggal <strong>17 November 2026 pukul 17.00 WIB</strong>.</li>
+                            <li><strong>Periode Utama Pengisian:</strong> Responden dapat mengakses dan mengisi kuesioner secara daring selama periode aktif tanggal <strong>17 November 2026, pukul 17.00 WIB s.d. 20 November 2026, pukul 23.59 WIB</strong>.</li>
+                            <li><strong>Batas Akhir & Penutupan Sistem:</strong> Pengisian kuesioner ditutup secara otomatis pada tanggal <strong>20 November 2026 pukul 23.59 WIB</strong></li>
+                        </ul>
+                    </div>
+
                     <div class="bg-slate-50 border-l-4 border-blue-800 p-4 rounded-r-lg text-sm space-y-1.5">
                         <p class="font-bold text-slate-900">Petunjuk & Jaminan Kerahasiaan:</p>
                         <ul class="list-disc list-inside text-slate-600 space-y-1">
                             <li>Kuesioner ini ditujukan bagi pasien/keluarga pasien rawat inap RSU Banjar Patroman yang pernah berinteraksi dengan layanan <strong>AI-Based Chatbot</strong> rumah sakit.</li>
-                            <li>Tidak ada jawaban benar atau salah. Mohon pilih jawaban yang paling sesuai dengan pengalaman nyata Bapak/Ibu.</li>
-                            <li>Seluruh identitas dan data yang diberikan dijamin kerahasiaannya dan hanya digunakan untuk kepentingan akademik.</li>
+                            <li>Tidak ada jawaban benar atau salah. Setiap responden memilih jawaban yang paling sesuai dengan pengalaman nyata selama menggunakan layanan.</li>
+                            <li>Seluruh identitas dan data yang diberikan dijamin kerahasiaannya serta hanya digunakan untuk kepentingan analisis akademik tesis.</li>
                         </ul>
                     </div>
 
                     <div class="pt-2">
-                        <label class="inline-flex items-start gap-3 cursor-pointer select-none">
-                            <input type="checkbox" id="consentCheck" class="mt-1 w-4 h-4 text-blue-900 rounded border-slate-300 focus:ring-blue-800" checked>
+                        <label class="inline-flex items-start gap-3 select-none opacity-80">
+                            <input type="checkbox" id="consentCheck" class="mt-1 w-4 h-4 text-blue-900 rounded border-slate-300" checked disabled>
                             <span class="text-sm font-medium text-slate-800">
                                 Saya telah membaca prolog di atas dan <strong>bersedia secara sukarela</strong> berpartisipasi sebagai responden dalam penelitian ini.
                             </span>
@@ -112,11 +144,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-sm">
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">Inisial Nama / No. RM (Opsional)</label>
-                            <input type="text" name="No_RM" placeholder="Contoh: Ny. S / 6102" class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 focus:outline-none focus:border-blue-800">
+                            <input type="text" name="No_RM" placeholder="Contoh: Ny. S / 6102" class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-slate-50 text-slate-500">
                         </div>
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">Jenis Kelamin <span class="text-red-500">*</span></label>
-                            <select name="Jenis_Kelamin" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                            <select name="Jenis_Kelamin" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-slate-50 text-slate-500">
                                 <option value="">-- Pilih Jenis Kelamin --</option>
                                 <option value="Perempuan">Perempuan</option>
                                 <option value="Laki-laki">Laki-laki</option>
@@ -124,7 +156,7 @@
                         </div>
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">Kelompok Usia <span class="text-red-500">*</span></label>
-                            <select name="Kelompok_Usia" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                            <select name="Kelompok_Usia" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-slate-50 text-slate-500">
                                 <option value="">-- Pilih Kelompok Usia --</option>
                                 <option value="18–25 Tahun">18–25 Tahun</option>
                                 <option value="26–35 Tahun">26–35 Tahun</option>
@@ -135,7 +167,7 @@
                         </div>
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">Pendidikan Terakhir <span class="text-red-500">*</span></label>
-                            <select name="Pendidikan" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                            <select name="Pendidikan" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-slate-50 text-slate-500">
                                 <option value="">-- Pilih Pendidikan --</option>
                                 <option value="SMA/SMK">SMA / SMK</option>
                                 <option value="Diploma (D3)">Diploma (D3)</option>
@@ -145,7 +177,7 @@
                         </div>
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">Jenis Pembiayaan Rawat Inap <span class="text-red-500">*</span></label>
-                            <select name="Jenis_Pembiayaan" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                            <select name="Jenis_Pembiayaan" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-slate-50 text-slate-500">
                                 <option value="">-- Pilih Pembiayaan --</option>
                                 <option value="BPJS Kesehatan">BPJS Kesehatan</option>
                                 <option value="Umum / Pribadi">Umum / Pribadi</option>
@@ -154,7 +186,7 @@
                         </div>
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">Topik Utama Interaksi Chatbot <span class="text-red-500">*</span></label>
-                            <select name="Kategori_Chat" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-white focus:outline-none focus:border-blue-800">
+                            <select name="Kategori_Chat" required class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 bg-slate-50 text-slate-500">
                                 <option value="">-- Pilih Topik Chat --</option>
                                 <option value="Ketersediaan Kamar Rawat Inap">Ketersediaan Kamar Rawat Inap</option>
                                 <option value="Alur & Syarat Pendaftaran Rawat Inap">Alur & Syarat Pendaftaran Rawat Inap</option>
@@ -182,14 +214,14 @@
                 <!-- Submit Bar -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="text-sm text-slate-600">
-                        <span id="progressText" class="font-bold text-blue-900">0 / 51</span> pernyataan telah diisi.
+                        Status Pengisian: <span class="font-bold text-amber-700">Ditutup pada 20 November 2026, Pukul 23.59 WIB (N = 278 Responden)</span>
                     </div>
                     <div class="flex gap-3 w-full sm:w-auto">
-                        <button type="button" onclick="resetForm()" class="w-1/3 sm:w-auto px-5 py-3 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition">
-                            Reset
+                        <button type="button" onclick="showClosedModal()" class="w-1/2 sm:w-auto px-5 py-3 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition">
+                            Info Penutupan
                         </button>
-                        <button type="submit" id="submitBtn" class="w-2/3 sm:w-auto bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-xl font-bold text-sm shadow-md transition">
-                            Kirim Jawaban Kuesioner
+                        <button type="submit" id="submitBtn" class="w-1/2 sm:w-auto bg-slate-400 text-white px-8 py-3 rounded-xl font-bold text-sm cursor-not-allowed opacity-75">
+                            Pengisian Ditutup (23.59 WIB)
                         </button>
                     </div>
                 </div>
@@ -197,7 +229,7 @@
         </section>
 
         <!-- ========================================================= -->
-        <!-- TAB 2: DASHBOARD HASIL SAAT INI (278 RESPONDEN)           -->
+        <!-- TAB 2: DASHBOARD HASIL FINAL (278 RESPONDEN)              -->
         <!-- ========================================================= -->
         <section id="sectionHasil" class="hidden space-y-8">
             
@@ -205,13 +237,13 @@
             <div class="bg-emerald-900 text-white rounded-2xl p-6 shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <span class="bg-emerald-700 text-emerald-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        Rekapitulasi Data Lapangan Terkumpul
+                        Rekapitulasi Data Final • Ditutup 20 Nov 2026 Pukul 23.59 WIB
                     </span>
                     <h2 class="text-xl sm:text-2xl font-bold mt-2">
-                        Hasil Analisis Saat Ini: <span id="dashTotalN">278</span> Responden Terverifikasi
+                        Hasil Analisis Final: <span id="dashTotalN">278</span> Responden Terverifikasi
                     </h2>
                     <p class="text-emerald-200 text-sm mt-1">
-                        Periode Pengumpulan Data: 25 Juni 2025 – Juni 2026 • Instrumen: 51 Butir Pernyataan (Skala Likert 1–4)
+                        Distribusi Kuesioner: 17 Nov 2026 (17.00 WIB) – 20 Nov 2026 (23.59 WIB) • Instrumen: 51 Butir Pernyataan (Likert 1–4)
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-2.5">
@@ -219,7 +251,7 @@
                         Unduh JSON (278 Data)
                     </a>
                     <button onclick="exportCurrentCSV()" class="bg-emerald-700 hover:bg-emerald-600 text-white border border-emerald-500 px-4 py-2.5 rounded-xl text-xs font-bold transition">
-                        Export CSV Terbaru
+                        Export CSV Lengkap (Tanggal & Jam)
                     </button>
                 </div>
             </div>
@@ -229,7 +261,7 @@
                 <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
                     <p class="text-xs text-slate-500 uppercase font-bold">Total Responden (N)</p>
                     <p id="kpiN" class="text-3xl font-extrabold text-blue-950 mt-1">278</p>
-                    <p class="text-xs text-emerald-600 font-medium mt-1">100% Memenuhi Kriteria Inklusi</p>
+                    <p class="text-xs text-emerald-600 font-medium mt-1">100% Terpenuhi (Tutup 20 Nov, 23.59 WIB)</p>
                 </div>
                 <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
                     <p class="text-xs text-slate-500 uppercase font-bold">R-Square Keputusan (Y)</p>
@@ -244,7 +276,7 @@
                 <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
                     <p class="text-xs text-slate-500 uppercase font-bold">Model Fit (SRMR)</p>
                     <p class="text-3xl font-extrabold text-emerald-600 mt-1">0.045</p>
-                    <p class="text-xs text-slate-500 mt-1">Good Fit (< 0.08)</p>
+                    <p class="text-xs text-slate-500 mt-1">Good Fit (&lt; 0.08)</p>
                 </div>
             </div>
 
@@ -280,7 +312,7 @@
                                 <th class="py-3 px-4 text-center">Kode</th>
                                 <th class="py-3 px-4 text-center">Jumlah Butir</th>
                                 <th class="py-3 px-4 text-center">Rentang Outer Loading</th>
-                                <th class="py-3 px-4 text-center">AVE (> 0,50)</th>
+                                <th class="py-3 px-4 text-center">AVE (&gt; 0,50)</th>
                                 <th class="py-3 px-4 text-center">Cronbach's Alpha (≥ 0,70)</th>
                                 <th class="py-3 px-6 text-center">Status</th>
                             </tr>
@@ -331,7 +363,7 @@
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <div class="bg-slate-100 px-6 py-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <h3 class="font-bold text-slate-900">2. Hasil Uji Hipotesis Pengaruh Langsung & Mediasi (Bootstrapping 5.000 Subsamples)</h3>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded">Taraf Signifikansi 5% (t > 1,96)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded">Taraf Signifikansi 5% (t &gt; 1,96)</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
@@ -339,8 +371,8 @@
                             <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
                                 <th class="py-3 px-6">Jalur Hubungan Struktural</th>
                                 <th class="py-3 px-4 text-center">Original Sample (β)</th>
-                                <th class="py-3 px-4 text-center">t-Statistic (> 1,96)</th>
-                                <th class="py-3 px-4 text-center">p-Value (< 0,05)</th>
+                                <th class="py-3 px-4 text-center">t-Statistic (&gt; 1,96)</th>
+                                <th class="py-3 px-4 text-center">p-Value (&lt; 0,05)</th>
                                 <th class="py-3 px-6 text-center">Kesimpulan Hipotesis</th>
                             </tr>
                         </thead>
@@ -417,7 +449,7 @@
                             <li class="flex justify-between"><span>26–35 Tahun</span><strong>88 (31,7%)</strong></li>
                             <li class="flex justify-between"><span>36–45 Tahun</span><strong>72 (25,9%)</strong></li>
                             <li class="flex justify-between"><span>46–55 Tahun</span><strong>56 (20,1%)</strong></li>
-                            <li class="flex justify-between"><span>> 55 Tahun</span><strong>36 (12,9%)</strong></li>
+                            <li class="flex justify-between"><span>&gt; 55 Tahun</span><strong>36 (12,9%)</strong></li>
                         </ul>
                     </div>
                     <div class="border border-slate-200 rounded-xl p-4">
@@ -445,61 +477,46 @@
     </main>
 
     <!-- Modal Pemberitahuan Kuesioner Ditutup (Profesional) -->
-    <div id="closedModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+    <div id="closedModal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 text-center shadow-2xl space-y-5 border border-slate-100">
             <div class="w-16 h-16 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center mx-auto text-3xl font-bold shadow-inner">
                 🔒
             </div>
             <div class="space-y-2">
                 <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                    Pengumuman Resmi Penelitian
+                    Pengumuman Resmi Penutupan Survei
                 </span>
-                <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Pengisian Kuesioner Telah Ditutup</h3>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Pengisian Kuesioner Telah Dihentikan</h3>
             </div>
             <p class="text-sm sm:text-base text-slate-600 leading-relaxed text-justify sm:text-center">
-                Yth. Bapak/Ibu/Saudara/i, batas waktu pengambilan data primer penelitian tesis mengenai layanan rawat inap dan pemanfaatan AI-Based Chatbot di <strong>RSU Banjar Patroman</strong> telah resmi berakhir. Target sampel (N = 278) telah terpenuhi secara penuh dan saat ini proses analisis data sedang dilanjutkan. Terima kasih yang sebesar-besarnya atas partisipasi serta kontribusi Anda.
+                Yth. Bapak/Ibu/Saudara/i, pengambilan data kuesioner penelitian tesis di <strong>RSU Banjar Patroman</strong> (yang dibuka sejak <strong>17 November 2026 pukul 17.00 WIB</strong> hingga periode aktif <strong>18–20 November 2026</strong>) telah resmi <strong>dihentikan pada tanggal 20 November 2026 pukul 23.59 WIB</strong> dengan total capaian <strong>278 responden terverifikasi</strong>. Terima kasih atas partisipasi dan kontribusi Anda.
             </p>
-            <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-700 font-medium">
+                Status Akhir: <strong>N = 278 Responden (100% Target Sampel Terpenuhi)</strong>
+            </div>
+            <div class="pt-1 flex flex-col sm:flex-row gap-3 justify-center">
                 <button onclick="closeClosedModalAndViewResults()" class="bg-blue-900 hover:bg-blue-800 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-md transition w-full sm:w-auto">
-                    Akses Dashboard Hasil Penelitian (N = 278)
+                    Lihat Rekapitulasi Hasil (N = 278)
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Sukses Submit (Cadangan jika dibuka manual) -->
-    <div id="successModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center shadow-2xl space-y-4">
-            <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
-                ✓
-            </div>
-            <h3 class="text-xl font-extrabold text-slate-900">Terima Kasih atas Partisipasi Anda!</h3>
-            <p class="text-sm text-slate-600 leading-relaxed">
-                Jawaban kuesioner Anda telah berhasil direkam ke dalam sistem penelitian tesis RSU Banjar Patroman. Anda sekarang dapat melihat rekapitulasi hasil penelitian saat ini.
-            </p>
-            <div class="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center">
-                <button onclick="closeModalAndViewResults()" class="bg-blue-900 hover:bg-blue-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition">
-                    Lihat Hasil Penelitian Sekarang
-                </button>
-                <button onclick="closeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm font-semibold transition">
-                    Tutup
+                <button onclick="hideClosedModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-3 rounded-xl text-sm font-semibold transition w-full sm:w-auto">
+                    Baca Prolog & Instrumen
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-	<footer class="bg-white border-t border-slate-200 mt-16 py-6 text-center text-xs text-slate-500 space-y-1.5">
-	  <p>
-		© 2026 Fa'idh Husnan (NIM: 20220309186) — Tesis Magister Administrasi Rumah Sakit (MARS) Universitas Esa Unggul • RSU Banjar Patroman.
-	  </p>
-	  <p>
-		Kontak WhatsApp: 
-		<a href="https://wa.me/6282119119299" target="_blank" rel="noopener noreferrer" class="font-medium text-emerald-600 hover:underline">
-		  +62 821-1911-9299
-		</a>
-	  </p>
-	</footer>
+    <footer class="bg-white border-t border-slate-200 mt-16 py-6 text-center text-xs text-slate-500 space-y-1.5">
+        <p>
+            © 2026 Fa'idh Husnan (NIM: 20220309186) — Tesis Magister Administrasi Rumah Sakit (MARS) Universitas Esa Unggul • RSU Banjar Patroman.
+        </p>
+        <p>
+            Kontak WhatsApp: 
+            <a href="https://wa.me/6282119119299" target="_blank" rel="noopener noreferrer" class="font-medium text-emerald-600 hover:underline">
+                +62 821-1911-9299
+            </a>
+        </p>
+    </footer>
 
     <!-- JAVASCRIPT: DATA KISI-KISI 51 BUTIR & LOGIKA INTERAKTIF -->
     <script>
@@ -592,7 +609,6 @@
             { val: 4, short: "4 - SS", desc: "Sangat Setuju" }
         ];
 
-        // Render Form Pertanyaan
         function renderQuestions() {
             const container = document.getElementById('questionsContainer');
             container.innerHTML = INSTRUMENT_SECTIONS.map(sec => `
@@ -602,17 +618,17 @@
                         <p class="text-xs text-slate-600 mt-0.5">${sec.subtitle}</p>
                     </div>
                     <div class="divide-y divide-slate-100">
-                        ${sec.items.map((item, idx) => `
+                        ${sec.items.map(item => `
                             <div class="p-5 hover:bg-slate-50/70 transition flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                                 <div class="flex gap-3 items-start max-w-2xl">
                                     <span class="bg-blue-100 text-blue-900 font-bold text-xs px-2.5 py-1 rounded-md shrink-0 mt-0.5">${item.id}</span>
                                     <p class="text-sm sm:text-base text-slate-800 font-medium">${item.text}</p>
                                 </div>
-                                <div class="grid grid-cols-4 gap-2 shrink-0">
+                                <div class="grid grid-cols-4 gap-2 shrink-0 opacity-75">
                                     ${LIKERT_LABELS.map(opt => `
                                         <div>
-                                            <input type="radio" id="${item.id}_${opt.val}" name="${item.id}" value="${opt.val}" required class="hidden likert-radio" onchange="updateProgress()">
-                                            <label for="${item.id}_${opt.val}" title="${opt.desc}" class="block text-center cursor-pointer border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-600 hover:border-blue-800 transition select-none">
+                                            <input type="radio" id="${item.id}_${opt.val}" name="${item.id}" value="${opt.val}" disabled class="hidden likert-radio">
+                                            <label for="${item.id}_${opt.val}" title="${opt.desc}" class="block text-center cursor-not-allowed border border-slate-300 bg-slate-50 rounded-lg px-3 py-2 text-xs font-bold text-slate-500 select-none">
                                                 ${opt.short}
                                             </label>
                                         </div>
@@ -625,40 +641,8 @@
             `).join('');
         }
 
-        function updateProgress() {
-            const totalItems = 51;
-            const answered = document.querySelectorAll('#surveyForm input[type="radio"]:checked').length;
-            document.getElementById('progressText').textContent = `${answered} / ${totalItems}`;
-        }
-
-        function resetForm() {
-            document.getElementById('surveyForm').reset();
-            updateProgress();
-        }
-
-        // Kelola Responden Tambahan via LocalStorage (Basis 278 Responden)
-        const BASE_COUNT = 278;
-        function getExtraSubmissions() {
-            try {
-                return JSON.parse(localStorage.getItem('rsbp_extra_responses') || '[]');
-            } catch (e) {
-                return [];
-            }
-        }
-
-        function syncCounts() {
-            const extra = getExtraSubmissions();
-            const total = BASE_COUNT + extra.length;
-            document.getElementById('headerTotalResp').textContent = total;
-            document.getElementById('tabCountResp').textContent = total;
-            document.getElementById('dashTotalN').textContent = total;
-            document.getElementById('kpiN').textContent = total;
-        }
-
-        // Handle Submit Form (Diblokir karena Kuesioner Sudah Ditutup)
         document.getElementById('surveyForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Tampilkan kembali modal pemberitahuan bahwa kuesioner terkunci
             showClosedModal();
         });
 
@@ -667,25 +651,17 @@
             document.getElementById('closedModal').classList.add('flex');
         }
 
-        function closeClosedModalAndViewResults() {
+        function hideClosedModal() {
             document.getElementById('closedModal').classList.add('hidden');
             document.getElementById('closedModal').classList.remove('flex');
+        }
+
+        function closeClosedModalAndViewResults() {
+            hideClosedModal();
             switchTab('hasil');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function closeModal() {
-            document.getElementById('successModal').classList.add('hidden');
-            document.getElementById('successModal').classList.remove('flex');
-        }
-
-        function closeModalAndViewResults() {
-            closeModal();
-            switchTab('hasil');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Switch Tabs
         function switchTab(tab) {
             const secKuesioner = document.getElementById('sectionKuesioner');
             const secHasil = document.getElementById('sectionHasil');
@@ -706,7 +682,6 @@
             }
         }
 
-        // Render Chart.js untuk Tab Hasil
         let chartsInitialized = false;
         function renderCharts() {
             if (chartsInitialized) return;
@@ -751,12 +726,10 @@
             });
         }
 
-        // Export CSV Gabungan (278 Data + Input Baru)
         async function exportCurrentCSV() {
             try {
                 const res = await fetch('data_278_responden.json');
-                const baseData = await res.json();
-                const allData = baseData.concat(getExtraSubmissions());
+                const allData = await res.json();
                 const headers = Object.keys(allData[0]);
                 const csvRows = [
                     headers.join(','),
@@ -766,24 +739,14 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `Dataset_Kuesioner_${allData.length}_Responden_RSBP.csv`;
+                a.download = `Dataset_Final_278_Responden_RSBP_20Nov2026.csv`;
                 a.click();
             } catch (err) {
                 alert("Pastikan file data_278_responden.json berada di folder yang sama saat di-deploy ke Vercel.");
             }
         }
 
-        // Fungsi Kunci Otomatis Formulir Saat Halaman Dimuat
         function lockFormCompletely() {
-            const submitBtn = document.getElementById('submitBtn');
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.classList.remove('bg-blue-900', 'hover:bg-blue-800', 'shadow-md');
-                submitBtn.classList.add('bg-slate-400', 'cursor-not-allowed', 'opacity-70');
-                submitBtn.textContent = 'Pengisian Ditutup (Terkunci)';
-            }
-            
-            // Nonaktifkan semua elemen input pilihan/radio pada kuesioner
             const formElements = document.querySelectorAll('#surveyForm input, #surveyForm select');
             formElements.forEach(el => {
                 if (el.type !== 'button' && el.type !== 'submit') {
@@ -792,12 +755,9 @@
             });
         }
 
-        // Init
         renderQuestions();
-        syncCounts();
         lockFormCompletely();
 
-        // Tampilkan modal keterawatan (penutupan kuesioner) secara otomatis saat halaman dibuka
         window.addEventListener('DOMContentLoaded', () => {
             showClosedModal();
         });
